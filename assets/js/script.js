@@ -1,4 +1,6 @@
 var myArr = [];
+var steps = 1;
+var correctAnswer;
 
 // Function to load questions from JSON file.
 $(function() {
@@ -21,5 +23,19 @@ function selectQuestion(arr) {
     $("#answer_b").html(arr[0].answer_b);
     $("#answer_c").html(arr[0].answer_c);
     $("#answer_d").html(arr[0].answer_d);
+    correctAnswer = arr[0].correct;
 
 };
+
+
+// Function to check selected answer
+
+function selected(a) {
+    if (a === correctAnswer) {
+        $("#correct").html("You guess it right");
+        steps = steps + 1;
+
+    } else {
+        $("#correct").html("Sorry, wrong answer");
+    }
+}
