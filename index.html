@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="assets/js/script.js"></script>
     <title>Millionaire Quiz Game</title>
 </head>
@@ -17,11 +18,19 @@
     <div class="row">
         <div class="col">
             <h1>Millionaire Quiz Game</h1>
-            <p>Hello</p>
+
+            <p id="question"></p>
+            <button id="answer_a" onclick="selected('A')"></button>
+            <button id="answer_b" onclick="selected('B')"></button>
+            <button id="answer_c" onclick="selected('C')"></button>
+            <button id="answer_d" onclick="selected('D')"></button>
+
+            <p id="correct"></p>
+
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
