@@ -1,8 +1,11 @@
 var myArr = [];
 var steps = 1;
+var selection;
 var correctAnswer;
 var totalQuestions = 547;
 var randomQuestion;
+var questionLength;
+
 
 // Function to load questions from JSON file.
 $(function() {
@@ -17,20 +20,33 @@ $(function() {
     };
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
-    timerStart();
+
 });
 
 function selectQuestion(arr) {
     randomQuestion = generateNumber();
-    $("#question").html(arr[randomQuestion].question);
-    $("#answer_a").html(arr[randomQuestion].answer_a);
-    $("#answer_b").html(arr[randomQuestion].answer_b);
-    $("#answer_c").html(arr[randomQuestion].answer_c);
-    $("#answer_d").html(arr[randomQuestion].answer_d);
-    correctAnswer = arr[randomQuestion].correct;
-
+    selection = {
+        q: arr[randomQuestion].question,
+        a: arr[randomQuestion].answer_a,
+        b: arr[randomQuestion].answer_b,
+        d: arr[randomQuestion].answer_d,
+        c: arr[randomQuestion].answer_c,
+        cor: arr[randomQuestion].correct
+    };
+    display();
 };
 
+//Function to display question and answers
+
+function display() {
+    document.getElementById("question").innerHTML = selection.q;
+    document.getElementById("answer_a").innerHTML = selection.a;
+    document.getElementById("answer_b").innerHTML = selection.b;
+    document.getElementById("answer_c").innerHTML = selection.c;
+    document.getElementById("answer_d").innerHTML = selection.d;
+    questionLength = selection.q.length;
+    delay();
+}
 
 // Function to check selected answer
 
@@ -51,7 +67,7 @@ function timerStart() {
     downloadTimer = setInterval(function() {
         if (timeleft <= 0) {
             clearInterval(downloadTimer);
-            $("#countdown").html("Time's out!");
+            timeOut();
         } else {
             $("#countdown").html(timeleft + " seconds remaining");
         }
@@ -64,6 +80,35 @@ function resetTimer() {
     $("#countdown").empty();
 }
 
+// Function to delay the timer based on the length of the question
+
+function delay() {
+    var t = (calculateDelay(questionLength) * 1000);
+    console.log("Time: " + t);
+    setTimeout(function() {
+        timerStart();
+    }, t);
+}
+
+function calculateDelay(q) {
+    var q = questionLength;
+    console.log("Delay " + questionLength);
+    if (q < 20) {
+        console.log("Less than 20");
+        return 5;
+    } else if (q < 50) {
+        console.log("Less than 50");
+        return 10;
+    } else if (q < 75) {
+        console.log("Less than 75");
+        return 15;
+    } else if (q < 100) {
+        console.log("Less than 100");
+        return 20;
+    }
+}
+
+
 
 // Function to generate random question
 
@@ -75,7 +120,15 @@ function generateNumber() {
     }
 }
 
+// Game over function
+
 function gameOver() {
     $("#correct").html("Sorry, wrong answer");
     resetTimer();
+}
+
+// Time Out function
+
+function timeOut() {
+    $("#countdown").html("Time's out!");
 }
