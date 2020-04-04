@@ -1,11 +1,24 @@
 var myArr = [];
 var steps = 1;
+var step = 0;
 var selection;
+var selectedQuestions = [];
 var correctAnswer;
 var totalQuestions = 547;
 var randomQuestion;
 var questionLength;
+var timeleft;
+var downloadTimer;
 
+// Function to generate unique set of 12 questions using Chance.js library
+
+function generateUnique() {
+    var uniques = chance.unique(chance.natural, 12, {
+        min: 1,
+        max: 547
+    });
+    return uniques;
+}
 
 // Function to load questions from JSON file.
 $(function() {
@@ -15,55 +28,74 @@ $(function() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             myArr = JSON.parse(this.responseText);
-            selectQuestion(myArr);
+            // selectQuestion(myArr);
+            loadQuestions();
+            startGame();
         }
     };
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
-
+    $(".answer-button").removeClass("selected-answer correct-answer")
 });
 
-function selectQuestion(arr) {
-    randomQuestion = generateNumber();
+// Function to create sub array of 12 questions from big array using generated numbers
+
+function loadQuestions() {
+    randomQuestion = generateUnique();
+    for (i = 0; i < 12; i++) {
+        var value = randomQuestion[i];
+        selectedQuestions.push(myArr[value]);
+        console.log(selectedQuestions[i]);
+    }
+
+    return selectedQuestions;
+
+}
+
+function startGame() {
     selection = {
-        q: arr[randomQuestion].question,
-        a: arr[randomQuestion].answer_a,
-        b: arr[randomQuestion].answer_b,
-        d: arr[randomQuestion].answer_d,
-        c: arr[randomQuestion].answer_c,
-        cor: arr[randomQuestion].correct
+        q: selectedQuestions[step].question,
+        a: selectedQuestions[step].answer_a,
+        b: selectedQuestions[step].answer_b,
+        c: selectedQuestions[step].answer_c,
+        d: selectedQuestions[step].answer_d,
+        cor: selectedQuestions[step].correct
     };
-    display();
-};
-
-//Function to display question and answers
-
-function display() {
+    $(".answer-button").removeClass("selected-answer correct-answer");
     document.getElementById("question").innerHTML = selection.q;
     document.getElementById("answer_a").innerHTML = selection.a;
     document.getElementById("answer_b").innerHTML = selection.b;
     document.getElementById("answer_c").innerHTML = selection.c;
     document.getElementById("answer_d").innerHTML = selection.d;
+    correctAnswer = selection.cor;
     questionLength = selection.q.length;
     delay();
-}
+};
+
+//Function to display question and answers
+
+
 
 // Function to check selected answer
 
 function selected(a) {
-    if (a === correctAnswer) {
+    $("#" + a).addClass("selected-answer");
+    if (a == correctAnswer) {
         $("#correct").html("You guess it right");
-        steps = steps + 1;
+        step = step + 1;
         resetTimer();
+        startGame();
+    } else if (timeleft <= 0) {
+        timeOut();
     } else {
-        gameOver();
+        wrongAnswer();
     }
 }
 
 // Question countdown functions
 
 function timerStart() {
-    var timeleft = 45;
+    timeleft = 45;
     downloadTimer = setInterval(function() {
         if (timeleft <= 0) {
             clearInterval(downloadTimer);
@@ -108,22 +140,18 @@ function calculateDelay(q) {
     }
 }
 
-
-
-// Function to generate random question
-
-function generateNumber() {
-    while (0 !== totalQuestions) {
-        var currentIndex = Math.floor(Math.random() * totalQuestions);
-        totalQuestions -= 1;
-        return currentIndex;
-    }
+// Wrong answer function
+function wrongAnswer() {
+    alert("Sorry, wrong answer\nCorrect answer is " + selection.cor);
+    $("#" + selection.cor).addClass("correct-answer");
+    gameOver();
 }
+
 
 // Game over function
 
 function gameOver() {
-    $("#correct").html("Sorry, wrong answer");
+    $("#correct").html("GAME OVER");
     resetTimer();
 }
 

@@ -1,0 +1,7 @@
+.correct-answer {
+    background-color: red;
+}
+
+.selected-answer {
+    background-color: aqua;
+}

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="http://chancejs.com/chance.min.js"></script>
     <script src="assets/js/script.js"></script>
     <title>Millionaire Quiz Game</title>
 </head>
@@ -20,10 +21,10 @@
             <h1>Millionaire Quiz Game</h1>
 
             <p id="question"></p>
-            <button id="answer_a" onclick="selected('A')"></button>
-            <button id="answer_b" onclick="selected('B')"></button>
-            <button id="answer_c" onclick="selected('C')"></button>
-            <button id="answer_d" onclick="selected('D')"></button>
+            <button class="answer-button" id="answer_a" onclick="selected('answer_a')"></button>
+            <button class="answer-button" id="answer_b" onclick="selected('answer_b')"></button>
+            <button class="answer-button" id="answer_c" onclick="selected('answer_c')"></button>
+            <button class="answer-button" id="answer_d" onclick="selected('answer_d')"></button>
 
             <p id="correct"></p>
 
