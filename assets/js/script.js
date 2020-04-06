@@ -122,7 +122,7 @@ function selected(a) {
     }
 }
 
-// Question countdown functions
+// Question countdown timer function
 
 function timerStart() {
     timeleft = 45;
