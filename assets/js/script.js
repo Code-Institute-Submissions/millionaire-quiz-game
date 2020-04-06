@@ -189,7 +189,7 @@ function gameOver() {
         resetTimer();
         saveScores();
         $('#countdown').hide();
-        $('#step').text(`You've reached question ${step + 1}`);
+        $('#step').text(`You've reached question ${step}`);
         $('#prizeWon').text(`Your prize is ${prize[step]}`);
         $('#gameOverWindow').modal('show');
     }
