@@ -57,7 +57,8 @@
                 </div>
                 <div class="modal-body">
                     <p>Enter your name below and let's start the game.</p>
-                    <input type="text" placeholder="Enter your name" id="playerName" required>
+                    <input type="text" placeholder="Enter your name" id="playerName">
+                    <p id="missingName" class="text-danger"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -106,7 +107,6 @@
                     <p>Sorry, you have to start again</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" onclick="playAgain();">Play again</button>
                 </div>
             </div>

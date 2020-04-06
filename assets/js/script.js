@@ -48,7 +48,6 @@ $(function() {
             myArr = JSON.parse(this.responseText);
             // selectQuestion(myArr);
             loadQuestions();
-            startGame();
             $('#myModal').modal('hide');
             $('#game-screen').hide();
             $('#gameOverWindow').modal('hide');
@@ -74,11 +73,16 @@ function loadQuestions() {
 }
 
 function firstPlay() {
-    $('#myModal').modal('hide');
-    $('#welcome-screen').hide();
-    $('#game-screen').show();
     player = document.getElementById('playerName').value;
-    document.getElementById('player').innerHTML = player;
+    if (player.length == 0) {
+        $('#missingName').text('You need to enter your name');
+    } else {
+        $('#myModal').modal('hide');
+        $('#welcome-screen').hide();
+        $('#game-screen').show();
+        document.getElementById('player').innerHTML = player;
+        startGame();
+    }
 }
 
 function startGame() {
@@ -102,8 +106,6 @@ function startGame() {
     questionLength = selection.q.length;
     delay();
 }
-
-//Function to display question and answers
 
 // Function to check selected answer
 
@@ -152,20 +154,17 @@ function delay() {
     }, t);
 }
 
+// Function that returns the amount of seconds based on the lenght of the question in characters
+
 function calculateDelay(q) {
     var q = questionLength;
-    console.log('Delay ' + questionLength);
     if (q < 20) {
-        console.log('Less than 20');
         return 5;
     } else if (q < 50) {
-        console.log('Less than 50');
         return 10;
     } else if (q < 75) {
-        console.log('Less than 75');
         return 15;
-    } else if (q < 100) {
-        console.log('Less than 100');
+    } else if (q < 200) {
         return 20;
     }
 }
