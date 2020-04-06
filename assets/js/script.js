@@ -24,6 +24,7 @@ var questionLength;
 var timeleft;
 var downloadTimer;
 var player;
+var chances = 3;
 
 var highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 console.log(highScores);
@@ -104,6 +105,8 @@ function startGame() {
     document.getElementById('prize').innerHTML = 'Current prize: ' + prize[step];
     correctAnswer = selection.cor;
     questionLength = selection.q.length;
+    showAllButtons();
+    $('#chances').text('50x50 Chance x ' + chances);
     delay();
 }
 
@@ -224,4 +227,35 @@ function saveScores() {
 
         localStorage.setItem('highScores', JSON.stringify(highScores));
     };
+}
+
+// Function to hide 2 incorrect answers
+
+function showAllButtons() {
+    $('#answer_a').show();
+    $('#answer_b').show();
+    $('#answer_c').show();
+    $('#answer_d').show();
+    $('#chances').removeClass('disabled');
+}
+
+function useChances() {
+    if (chances != 0) {
+        if (correctAnswer == "answer_a" || correctAnswer == 'answer_b') {
+            chances = chances - 1;
+            $('#answer_c').hide();
+            $('#answer_d').hide();
+            $('#chances').text('50x50 Chance x ' + chances);
+            $('#chances').addClass('disabled');
+        } else {
+            chances = chances - 1;
+            $('#answer_a').hide();
+            $('#answer_b').hide();
+            $('#chances').text('50x50 Chance x ' + chances);
+            $('#chances').addClass('disabled');
+        }
+    } else {
+        $('#chances').text('All chances used');
+        $('#chances').addClass('disabled');
+    }
 }
