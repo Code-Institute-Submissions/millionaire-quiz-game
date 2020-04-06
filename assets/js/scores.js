@@ -1,5 +1,5 @@
 var highScoresList = document.getElementById('highScoresList');
-var highScores = JSON.parse(localStorage.getItem('highScores'));
+var highScores = JSON.parse(localStorage.getItem('highScores')) || [];;
 
 highScoresList.innerHTML = highScores
     .map(score => {
