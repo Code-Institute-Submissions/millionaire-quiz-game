@@ -23,6 +23,10 @@ var randomQuestion;
 var questionLength;
 var timeleft;
 var downloadTimer;
+var player;
+
+var highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+console.log(highScores);
 
 // Function to generate unique set of 12 questions using Chance.js library
 
@@ -73,7 +77,7 @@ function firstPlay() {
     $('#myModal').modal('hide');
     $('#welcome-screen').hide();
     $('#game-screen').show();
-    var player = document.getElementById('playerName').value;
+    player = document.getElementById('playerName').value;
     document.getElementById('player').innerHTML = player;
 }
 
@@ -176,7 +180,9 @@ function wrongAnswer() {
 // Game over function
 
 function gameOver() {
+    step = step - 1;
     resetTimer();
+    saveScores();
     $('#countdown').hide();
     $('#step').text(step + 1);
     $('#prizeWon').text(prize[step]);
@@ -195,4 +201,20 @@ function playAgain() {
 function timeOut() {
     $('#countdown').hide();
     $('#timeOutWindow').modal('show');
+}
+
+// Save scores function
+
+function saveScores() {
+    var score = {
+        step: step,
+        score: prize[step],
+        player: player,
+    };
+    highScores.push(score);
+    highScores.sort((a, b) => b.step - a.step);
+    highScores.splice(10);
+
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+    console.log(highScores);
 }
