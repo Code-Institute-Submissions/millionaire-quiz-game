@@ -179,13 +179,20 @@ function wrongAnswer() {
 // Game over function
 
 function gameOver() {
-    step = step - 1;
-    resetTimer();
-    saveScores();
-    $('#countdown').hide();
-    $('#step').text(step + 1);
-    $('#prizeWon').text(prize[step]);
-    $('#gameOverWindow').modal('show');
+    if (step == 0) {
+        resetTimer();
+        $('#countdown').hide();
+        $('#step').text(`You've failed to answer the first question`);
+        $('#prizeWon').text(`You didn't win any money :-(`);
+        $('#gameOverWindow').modal('show');
+    } else {
+        resetTimer();
+        saveScores();
+        $('#countdown').hide();
+        $('#step').text(`You've reached question ${step + 1}`);
+        $('#prizeWon').text(`Your prize is ${prize[step]}`);
+        $('#gameOverWindow').modal('show');
+    }
 }
 
 function playAgain() {
@@ -202,18 +209,19 @@ function timeOut() {
     $('#timeOutWindow').modal('show');
 }
 
-// Save scores function
+// Save scores function, only saving results with more than 2 questions answered correctly
 
 function saveScores() {
-    var score = {
-        step: step,
-        score: prize[step],
-        player: player,
-    };
-    highScores.push(score);
-    highScores.sort((a, b) => b.step - a.step);
-    highScores.splice(10);
+    if (step >= 2) {
+        var score = {
+            step: step,
+            score: prize[step],
+            player: player,
+        };
+        highScores.push(score);
+        highScores.sort((a, b) => b.step - a.step);
+        highScores.splice(10);
 
-    localStorage.setItem('highScores', JSON.stringify(highScores));
-    console.log(highScores);
+        localStorage.setItem('highScores', JSON.stringify(highScores));
+    };
 }
