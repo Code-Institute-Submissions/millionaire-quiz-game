@@ -1,5 +1,4 @@
 var myArr = [];
-var steps = 1;
 var prize = [
     '€500',
     '€1,000',
@@ -53,11 +52,12 @@ $(function() {
             $('#game-screen').hide();
             $('#gameOverWindow').modal('hide');
             $('#timeOutWindow').modal('hide');
+            $('.answer-button').removeClass('selected-answer correct-answer');
         }
     };
     xmlhttp.open('GET', url, true);
     xmlhttp.send();
-    $('.answer-button').removeClass('selected-answer correct-answer');
+
 });
 
 // Function to create sub array of 12 questions from big array using generated numbers
@@ -94,18 +94,18 @@ function startGame() {
         b: selectedQuestions[step].answer_b,
         c: selectedQuestions[step].answer_c,
         d: selectedQuestions[step].answer_d,
-        cor: selectedQuestions[step].correct,
+        cor: selectedQuestions[step].correct
     };
     $('.answer-button').removeClass('selected-answer correct-answer');
     document.getElementById('question').innerHTML = selection.q;
-    document.getElementById('answer_a').innerHTML = selection.a;
-    document.getElementById('answer_b').innerHTML = selection.b;
-    document.getElementById('answer_c').innerHTML = selection.c;
-    document.getElementById('answer_d').innerHTML = selection.d;
+    document.getElementById('answer_a').innerHTML = '...';
+    document.getElementById('answer_b').innerHTML = '...';
+    document.getElementById('answer_c').innerHTML = '...';
+    document.getElementById('answer_d').innerHTML = '...';
     document.getElementById('prize').innerHTML = 'Current prize: ' + prize[step];
     correctAnswer = selection.cor;
     questionLength = selection.q.length;
-    showAllButtons();
+    showAllChanceButtons();
     $('#chances').text('50x50 Chance x ' + chances);
     delay();
 }
@@ -113,17 +113,21 @@ function startGame() {
 // Function to check selected answer
 
 function selected(a) {
-    $('#' + a).addClass('selected-answer');
-    if (a == correctAnswer) {
-        alert('You guessed it right!');
-        // $("#correct").html("You guess it right");
-        step = step + 1;
-        resetTimer();
-        startGame();
-    } else if (timeleft <= 0) {
-        timeOut();
+    if (step === 12) {
+        victory();
     } else {
-        wrongAnswer();
+        $('#' + a).addClass('selected-answer');
+        if (a == correctAnswer) {
+            alert('You guessed it right!');
+            // $("#correct").html("You guess it right");
+            step = step + 1;
+            resetTimer();
+            startGame();
+        } else if (timeleft <= 0) {
+            timeOut();
+        } else {
+            wrongAnswer();
+        }
     }
 }
 
@@ -136,6 +140,11 @@ function timerStart() {
             clearInterval(downloadTimer);
             timeOut();
         } else {
+            document.getElementById('answer_a').innerHTML = selection.a;
+            document.getElementById('answer_b').innerHTML = selection.b;
+            document.getElementById('answer_c').innerHTML = selection.c;
+            document.getElementById('answer_d').innerHTML = selection.d;
+
             $('#countdown').html(timeleft + ' seconds remaining');
         }
         timeleft -= 1;
@@ -172,6 +181,11 @@ function calculateDelay(q) {
     }
 }
 
+// Grand Prize winner function
+function victory() {
+    $('#victoryWindow').modal('show');
+}
+
 // Wrong answer function
 function wrongAnswer() {
     alert('Sorry, wrong answer\nCorrect answer is ' + selection.cor);
@@ -202,7 +216,7 @@ function playAgain() {
     resetTimer();
     setInterval(function() {
         location.reload();
-    }, 2000);
+    }, 700);
 }
 
 // Time Out function
@@ -229,33 +243,49 @@ function saveScores() {
     };
 }
 
-// Function to hide 2 incorrect answers
+// Function to reset all buttons after successful answer
 
-function showAllButtons() {
+function showAllChanceButtons() {
     $('#answer_a').show();
     $('#answer_b').show();
     $('#answer_c').show();
     $('#answer_d').show();
-    $('#chances').removeClass('disabled');
-}
-
-function useChances() {
-    if (chances != 0) {
-        if (correctAnswer == "answer_a" || correctAnswer == 'answer_b') {
-            chances = chances - 1;
-            $('#answer_c').hide();
-            $('#answer_d').hide();
-            $('#chances').text('50x50 Chance x ' + chances);
-            $('#chances').addClass('disabled');
-        } else {
-            chances = chances - 1;
-            $('#answer_a').hide();
-            $('#answer_b').hide();
-            $('#chances').text('50x50 Chance x ' + chances);
-            $('#chances').addClass('disabled');
-        }
+    console.log(`Chances: ${chances}`);
+    if (chances !== 0) {
+        $('#chances').removeClass('disabled');
     } else {
         $('#chances').text('All chances used');
         $('#chances').addClass('disabled');
     }
+}
+
+
+// Function to hide 2 incorrect answers
+
+function useChances() {
+    if (correctAnswer == "answer_a" || correctAnswer == 'answer_b') {
+        chances = chances - 1;
+        $('#answer_c').hide();
+        $('#answer_d').hide();
+        if (chances !== 0) {
+            $('#chances').text('50x50 Chance x ' + chances);
+            $('#chances').addClass('disabled');
+        } else {
+            $('#chances').text('All chances used');
+            $('#chances').addClass('disabled');
+        }
+
+    } else {
+        chances = chances - 1;
+        $('#answer_a').hide();
+        $('#answer_b').hide();
+        if (chances !== 0) {
+            $('#chances').text('50x50 Chance x ' + chances);
+            $('#chances').addClass('disabled');
+        } else {
+            $('#chances').text('All chances used');
+            $('#chances').addClass('disabled');
+        }
+    }
+
 }
