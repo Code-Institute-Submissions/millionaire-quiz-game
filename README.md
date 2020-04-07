@@ -1,8 +1,11 @@
 # Millionaire Quiz Game
 ## A quiz game for Code Institute Javascript Milestone 2 Project
+
 The game is a simplified version of popular TV Quiz Show - Who Wants to be a Millionaire.
+
 Each player has 12 questions to answer - the main prize is €1 Million.
-During the online game each player can use 3 chances. They will hide 2 incorrect answers from the set.
+During the online game each player can use 3 chances. Each chance will hide 2 incorrect answers from the set.
+
 Link to live project here: [Quiz Game][1]
 ---- 
 # UX
