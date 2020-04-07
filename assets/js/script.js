@@ -229,7 +229,7 @@ function timeOut() {
 // Save scores function, only saving results with more than 2 questions answered correctly
 
 function saveScores() {
-    if (step >= 2) {
+    if (step >= 3) {
         var score = {
             step: step,
             score: prize[step],
