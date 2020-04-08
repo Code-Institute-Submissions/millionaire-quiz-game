@@ -23,7 +23,6 @@ var player;
 var chances = 3;
 
 var highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-console.log(highScores);
 
 // Function to generate unique set of 12 questions using Chance.js library
 
@@ -51,6 +50,7 @@ $(function() {
             $('#timeOutWindow').modal('hide');
             $('.answer-button').removeClass('wrong-answer correct-answer');
         }
+
     };
     xmlhttp.open('GET', url, true);
     xmlhttp.send();
