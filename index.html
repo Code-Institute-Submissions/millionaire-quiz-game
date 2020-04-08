@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="https://chancejs.com/chance.min.js"></script>
+    <script src="https://chancejs.com/chance.min.js" defer></script>
     <script src="assets/js/script.js"></script>
     <title>Millionaire Quiz Game</title>
 </head>
@@ -24,47 +24,68 @@
             <div class="col-lg-6 align-self-center">
                 <h1>12 Steps to Million</h1>
                 <h4>Welcome to the game</h4>
-                <p>The rules are simple - you have to answer 12 questions to win a million. Each question has only 1 correct answer. </p>
+                <p>The rules are simple - you have to answer 12 questions to win a million. Each question has only 1 correct answer.
+                </p>
                 <p>You can use 3 chances throughout the game - they will remove 2 incorrect answers from the screen to help you guess</p>
                 <!-- Button trigger modal -->
 
                 <div class="row">
                     <div class="col-12 mt-4">
                         <button type="button" class="btn btn-primary btn-lg button-start" data-toggle="modal" data-target="#myModal">
-                            Start the Game
-                        </button>
+								Start the Game
+							</button>
                     </div>
                     <div class="col-12 mt-4">
                         <a class="btn btn-primary btn-lg button-start" href="leaderboard.html">View the list of best
-                            scores</a>
+																																																																																																																																																								                            scores</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row h-100 align-items-center justify-content-center" id="game-screen">
-            <div class="col">
-                <h1>Millionaire Quiz Game</h1>
-                <p>Hi,
-                    <span id="player"></span>
-                </p>
-                <p id="question"></p>
-                <div class="row">
-                    <div class="col-md-6 mt-4">
-                        <button class="answer-button" id="answer_a" onclick="selected('answer_a')"></button>
-                    </div>
-                    <div class="col-md-6 mt-4">
-                        <button class="answer-button" id="answer_b" onclick="selected('answer_b')"></button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mt-4"><button class="answer-button" id="answer_c" onclick="selected('answer_c')"></button></div>
-                    <div class="col-md-6 mt-4"><button class="answer-button" id="answer_d" onclick="selected('answer_d')"></button></div>
-                </div>
-                <p id="prize"></p>
-                <p id="correct"></p>
 
-                <div id="countdown"></div>
-                <button class="btn btn-primary btn-lg" id="chances" onclick="useChances()"></button>
+            <div class="col-12">
+                <h1>Millionaire Quiz Game</h1>
+                <div class="row justify-content-between">
+                    <div class="col-lg-2">
+                        <p id="prize"></p>
+                    </div>
+                    <div class="col-lg-2">
+                        <div id="countdown"></div>
+                    </div>
+                </div>
+                <p>Hi,
+                    <span id="player"></span>. This is your Question
+                    <span id="questionNumber">:</span>
+                </p>
+                <h4 class="mt-4" id="question"></h4>
+                <div class="row">
+                    <div class="col-md-6 mt-4">
+                        <button class="inactive-button" id="answer_a" onclick="selected('answer_a')"></button>
+                    </div>
+                    <div class="col-md-6 mt-4">
+                        <button class="inactive-button" id="answer_b" onclick="selected('answer_b')"></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mt-4">
+                        <button class="inactive-button" id="answer_c" onclick="selected('answer_c')"></button>
+                    </div>
+                    <div class="col-md-6 mt-4">
+                        <button class="inactive-button" id="answer_d" onclick="selected('answer_d')"></button>
+                    </div>
+                </div>
+                <p class="mt-4" id="correctMessage"></p>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-primary btn-lg mt-4" id="chances" onclick="useChances()"></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-danger btn-lg mt-4" id="chances" onclick="quitGame()">Quit Game</button>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -75,8 +96,8 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel">12 Steps to Million</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+								<span aria-hidden="true">&times;</span>
+							</button>
                     </div>
                     <div class="modal-body">
                         <p>Enter your name below and let's start the game.</p>
@@ -95,9 +116,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="gameOverLabel">Game Over</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
                     <div class="modal-body">
                         <p id="step"></p>
@@ -105,7 +123,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" id="playAgainGameover" onclick="playAgain();">Play
-                            again</button>
+																																																																																																																																																								                            again</button>
                     </div>
                 </div>
             </div>
@@ -116,9 +134,6 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel">Time Out!
                         </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
                     <div class="modal-body">
                         <p>You've run out of time to answer the question.
@@ -127,7 +142,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="playAgainTimeout" class="btn btn-primary" onclick="playAgain();">Play
-                            again</button>
+																																																																																																																																																								                            again</button>
                     </div>
                 </div>
             </div>
@@ -139,17 +154,17 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel">Congratulations!</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+								<span aria-hidden="true">&times;</span>
+							</button>
                     </div>
                     <div class="modal-body">
-                        <img src="/assets/images/winner-200px.svg">
+                        <img src="assets/images/winner-200px.svg">
                         <p class="text-center mt-3">You've answered all questions</p>
                         <p class="text-center">Enjoy your million!</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" id="playAgainGameover" onclick="playAgain();">Play
-                            again</button>
+																																																																																																																																																								                            again</button>
                     </div>
                 </div>
             </div>

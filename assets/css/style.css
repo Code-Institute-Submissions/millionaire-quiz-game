@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Concert+One&family=Luckiest+Guy&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Luckiest+Guy&display=swap');
 html {
     /* background-image: url("../images/navy-background.jpg"); */
-    background-image: url("../images/body-bg-2.jpg");
+    background-image: url('../images/body-bg-2.jpg');
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% 100%;
@@ -16,7 +16,7 @@ body {
     background-position: top center;
     background-size: cover; */
     color: white;
-    font-family: "Concert One", cursive;
+    font-family: 'Concert One', cursive;
     text-align: center;
     height: 100vh;
     min-height: 100vh;
@@ -26,16 +26,21 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: "Luckiest Guy", cursive;
+    font-family: 'Luckiest Guy', cursive;
 }
 
 p {
     font-size: 1.2rem;
 }
 
+#question {
+    color: yellow;
+    font-size: 1.7rem;
+}
+
 .btn {
     text-transform: uppercase;
-    font-family: "Luckiest Guy", cursive;
+    font-family: 'Luckiest Guy', cursive;
     font-size: 1.3rem;
     line-height: 1.5rem;
     padding-top: 15px;
@@ -44,7 +49,7 @@ p {
 .button-start {
     width: 90%;
     text-transform: uppercase;
-    font-family: "Luckiest Guy", cursive;
+    font-family: 'Luckiest Guy', cursive;
     font-size: 1.3rem;
     line-height: 1.5rem;
     padding-top: 15px;
@@ -60,23 +65,28 @@ p {
 
 .high-scores {
     text-transform: uppercase;
-    font-family: "Luckiest Guy", cursive;
+    font-family: 'Luckiest Guy', cursive;
     font-size: 1.6rem;
     line-height: 2rem;
 }
 
-.answer-button {
-    background-color: #0075ff;
+.inactive-button {
+    background-color: #646464;
     border: 2px solid white;
     border-radius: 15px;
-    color: white;
+    color: rgb(167, 167, 167);
     width: 100%;
     height: 50px;
     text-transform: uppercase;
-    font-family: "Luckiest Guy", cursive;
+    font-family: 'Luckiest Guy', cursive;
     font-size: 1.6rem;
     line-height: 2rem;
     padding-top: 10px;
+}
+
+.answer-button {
+    background-color: #0075ff;
+    color: white;
 }
 
 .answer-button:hover {
@@ -84,11 +94,17 @@ p {
 }
 
 .correct-answer {
-    background-color: red;
+    background-color: green;
 }
 
-.selected-answer {
-    background-color: aqua;
+.wrong-answer {
+    background-color: red !important;
+}
+
+#correctMessage {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.6rem;
+    color: greenyellow;
 }
 
 .close {

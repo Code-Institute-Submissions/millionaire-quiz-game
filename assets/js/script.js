@@ -1,4 +1,3 @@
-var myArr = [];
 var prize = [
     '€500',
     '€1,000',
@@ -17,8 +16,6 @@ var step = 0;
 var selection;
 var selectedQuestions = [];
 var correctAnswer;
-var totalQuestions = 547;
-var randomQuestion;
 var questionLength;
 var timeleft;
 var downloadTimer;
@@ -45,14 +42,14 @@ $(function() {
 
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            myArr = JSON.parse(this.responseText);
-            // selectQuestion(myArr);
-            loadQuestions();
+            var fullSetQuestions = [];
+            fullSetQuestions = JSON.parse(this.responseText);
+            loadQuestions(fullSetQuestions);
             $('#myModal').modal('hide');
             $('#game-screen').hide();
             $('#gameOverWindow').modal('hide');
             $('#timeOutWindow').modal('hide');
-            $('.answer-button').removeClass('selected-answer correct-answer');
+            $('.answer-button').removeClass('wrong-answer correct-answer');
         }
     };
     xmlhttp.open('GET', url, true);
@@ -62,17 +59,14 @@ $(function() {
 
 // Function to create sub array of 12 questions from big array using generated numbers
 
-function loadQuestions() {
-    randomQuestion = generateUnique();
-    for (i = 0; i < 12; i++) {
-        var value = randomQuestion[i];
-        selectedQuestions.push(myArr[value]);
-        console.log(selectedQuestions[i]);
-    }
-
+function loadQuestions(fullSet) {
+    var gameQuestionNumbers = generateUnique();
+    selectedQuestions = gameQuestionNumbers.map(numbers => fullSet[numbers]);
+    console.log(selectedQuestions);
     return selectedQuestions;
 }
 
+// Function called when the game starts. Checks if name input box not empty.
 function firstPlay() {
     player = document.getElementById('playerName').value;
     if (player.length == 0) {
@@ -86,7 +80,8 @@ function firstPlay() {
     }
 }
 
-function startGame() {
+function startGame() {;
+    $('#correctMessage').empty();
     $('#correct').empty();
     selection = {
         q: selectedQuestions[step].question,
@@ -96,36 +91,50 @@ function startGame() {
         d: selectedQuestions[step].answer_d,
         cor: selectedQuestions[step].correct
     };
-    $('.answer-button').removeClass('selected-answer correct-answer');
-    document.getElementById('question').innerHTML = selection.q;
-    document.getElementById('answer_a').innerHTML = '...';
-    document.getElementById('answer_b').innerHTML = '...';
-    document.getElementById('answer_c').innerHTML = '...';
-    document.getElementById('answer_d').innerHTML = '...';
-    document.getElementById('prize').innerHTML = 'Current prize: ' + prize[step];
+    $('.answer-button').removeClass('wrong-answer correct-answer');
+    $('#questionNumber').text(step + 1);
+    $('#question').text(selection.q);
+    $('#answer_a').text(selection.a);
+    $('#answer_b').text(selection.b);
+    $('#answer_c').text(selection.c);
+    $('#answer_d').text(selection.d);
+    $('#answer_a').prop("disabled", true);
+    $('#answer_b').prop("disabled", true);
+    $('#answer_c').prop("disabled", true);
+    $('#answer_d').prop("disabled", true);
+    $('#answer_a').removeClass('answer-button');
+    $('#answer_b').removeClass('answer-button');
+    $('#answer_c').removeClass('answer-button');
+    $('#answer_d').removeClass('answer-button');
+    $('#prize').text('Current prize: ' + prize[step]);
     correctAnswer = selection.cor;
     questionLength = selection.q.length;
-    showAllChanceButtons();
-    $('#chances').text('50x50 Chance x ' + chances);
+    showAllButtons();
+    $('#chances').text('50:50 Chance x ' + chances);
     delay();
 }
 
 // Function to check selected answer
 
-function selected(a) {
-    if (step === 12) {
+function selected(clickedButton) {
+    // First check if this is the final question of the game
+    if (step === 11) {
         victory();
     } else {
-        $('#' + a).addClass('selected-answer');
-        if (a == correctAnswer) {
-            alert('You guessed it right!');
-            // $("#correct").html("You guess it right");
+        $('#' + clickedButton).addClass('correct-answer');
+        if (clickedButton == correctAnswer) {
+            $('#correctMessage').text('Correct !');
             step = step + 1;
             resetTimer();
-            startGame();
+            setTimeout(function() {
+                startGame();
+            }, 3000);
+
         } else if (timeleft <= 0) {
             timeOut();
         } else {
+            $('#' + clickedButton).removeClass('correct-answer');
+            $('#' + clickedButton).addClass('wrong-answer');
             wrongAnswer();
         }
     }
@@ -140,16 +149,22 @@ function timerStart() {
             clearInterval(downloadTimer);
             timeOut();
         } else {
-            document.getElementById('answer_a').innerHTML = selection.a;
-            document.getElementById('answer_b').innerHTML = selection.b;
-            document.getElementById('answer_c').innerHTML = selection.c;
-            document.getElementById('answer_d').innerHTML = selection.d;
-
-            $('#countdown').html(timeleft + ' seconds remaining');
+            // Enabling buttons click event after the delay
+            $('#answer_a').prop("disabled", false);
+            $('#answer_b').prop("disabled", false);
+            $('#answer_c').prop("disabled", false);
+            $('#answer_d').prop("disabled", false);
+            $('#answer_a').addClass('answer-button');
+            $('#answer_b').addClass('answer-button');
+            $('#answer_c').addClass('answer-button');
+            $('#answer_d').addClass('answer-button');
+            $('#countdown').html(`<i class="fas fa-hourglass-half"></i> ${timeleft}`);
         }
         timeleft -= 1;
     }, 1000);
 }
+
+//Function used to reset the timer after sucessful answer or failed game. Used to prevent multiple timers running at the same time
 
 function resetTimer() {
     clearInterval(downloadTimer);
@@ -166,34 +181,33 @@ function delay() {
     }, t);
 }
 
-// Function that returns the amount of seconds based on the lenght of the question in characters
+// Function that returns the amount of seconds of delay based on the lenght of the question in characters. Used to hold the timer and allow the player to read the question
 
 function calculateDelay(q) {
     var q = questionLength;
-    if (q < 20) {
-        return 5;
-    } else if (q < 50) {
-        return 10;
-    } else if (q < 75) {
-        return 15;
+    if (q < 21) {
+        return 2;
+    } else if (q < 51) {
+        return 4;
+    } else if (q < 76) {
+        return 6;
     } else if (q < 200) {
-        return 20;
+        return 6;
     }
 }
 
-// Grand Prize winner function
+// Function to display Winner pop up when all question answered correctly
 function victory() {
     $('#victoryWindow').modal('show');
 }
 
 // Wrong answer function
 function wrongAnswer() {
-    alert('Sorry, wrong answer\nCorrect answer is ' + selection.cor);
     $('#' + selection.cor).addClass('correct-answer');
     gameOver();
 }
 
-// Game over function
+// Game over function, used when player clicks on wrong answer
 
 function gameOver() {
     if (step == 0) {
@@ -212,6 +226,8 @@ function gameOver() {
     }
 }
 
+// Function used when game fails either by out of time event or by selecting the wrong question
+
 function playAgain() {
     resetTimer();
     setInterval(function() {
@@ -219,14 +235,14 @@ function playAgain() {
     }, 700);
 }
 
-// Time Out function
+// Time Out function, used when player doesn't click on any answer
 
 function timeOut() {
-    $('#countdown').hide();
+    $('#countdown').html('<i class="fas fa-hourglass-half"></i> 0');
     $('#timeOutWindow').modal('show');
 }
 
-// Save scores function, only saving results with more than 2 questions answered correctly
+// Save scores function, only saving results with more than 3 questions answered correctly
 
 function saveScores() {
     if (step >= 3) {
@@ -245,7 +261,7 @@ function saveScores() {
 
 // Function to reset all buttons after successful answer
 
-function showAllChanceButtons() {
+function showAllButtons() {
     $('#answer_a').show();
     $('#answer_b').show();
     $('#answer_c').show();
@@ -268,7 +284,7 @@ function useChances() {
         $('#answer_c').hide();
         $('#answer_d').hide();
         if (chances !== 0) {
-            $('#chances').text('50x50 Chance x ' + chances);
+            $('#chances').text('50:50 Chance x ' + chances);
             $('#chances').addClass('disabled');
         } else {
             $('#chances').text('All chances used');
@@ -280,7 +296,7 @@ function useChances() {
         $('#answer_a').hide();
         $('#answer_b').hide();
         if (chances !== 0) {
-            $('#chances').text('50x50 Chance x ' + chances);
+            $('#chances').text('50:50 Chance x ' + chances);
             $('#chances').addClass('disabled');
         } else {
             $('#chances').text('All chances used');
@@ -288,4 +304,10 @@ function useChances() {
         }
     }
 
+}
+
+// Function to quit the game at go back to welcome screen
+
+function quitGame() {
+    location.reload();
 }
