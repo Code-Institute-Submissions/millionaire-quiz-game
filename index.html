@@ -20,16 +20,16 @@
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center" id="welcome-screen">
             <div class="col-lg-6 align-self-center">
-                <h1>12 Steps to Million</h1>
+                <img src="assets/images/quiz-logo-start.svg" class="logo-welcome mx-auto mb-4" alt="Game logo">
                 <h4>Welcome to the game</h4>
-                <p>The rules are simple - you have to answer 12 questions to win a million. Each question has only 1 correct answer.
+                <p>The rules are simple - you have to answer 12 questions to win the main prize. Each question has only 1 correct answer.
                 </p>
                 <p>You can use 3 chances throughout the game - they will remove 2 incorrect answers from the screen to help you guess</p>
                 <!-- Button trigger modal -->
 
                 <div class="row">
                     <div class="col-12 mt-4">
-                        <button type="button" class="btn btn-primary btn-lg button-start" data-toggle="modal" data-target="#myModal">
+                        <button type="button" class="btn btn-success btn-lg button-start" data-toggle="modal" data-target="#myModal">
                             Start the Game
                         </button>
                     </div>
@@ -43,7 +43,7 @@
         <div class="row h-100 align-items-center justify-content-center" id="game-screen">
 
             <div class="col-12">
-                <h1>Millionaire Quiz Game</h1>
+                <img src="assets/images/logo-quiz.svg" class="quiz-logo mx-auto mb-4" alt="Game main logo">
                 <div class="row justify-content-between">
                     <div class="col-lg-2">
                         <p id="prize"></p>
@@ -130,7 +130,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Time Out!
+                        <h4 class="modal-title" id="timeOutLabel">Time Out!
                         </h4>
                     </div>
                     <div class="modal-body">
@@ -156,13 +156,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="assets/images/winner-200px.svg">
+                        <img src="assets/images/winner-200px.svg" alt="Winner image">
                         <p class="text-center mt-3">You've answered all questions</p>
                         <p class="text-center">Enjoy your million!</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary playAgainButton">Play
-                            again</button>
+                        <button type="button" class="btn btn-primary playAgainButton">Play again</button>
                     </div>
                 </div>
             </div>

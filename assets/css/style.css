@@ -4,7 +4,7 @@
 
 body {
     background-color: transparent;
-    background-image: url("../images/body-bg.jpg");
+    background-image: url("../images/body-bg-3.jpg");
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -30,6 +30,14 @@ body {
 
 .close:hover {
     color: #fff;
+}
+
+.logo-welcome {
+    width: 90%;
+}
+
+.quiz-logo {
+    width: 50%;
 }
 
 
