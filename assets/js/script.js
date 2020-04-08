@@ -1,4 +1,4 @@
-var prize = [
+const prize = [
     '€500',
     '€1,000',
     '€2,000',
@@ -15,8 +15,6 @@ var prize = [
 var step = 0;
 var selection;
 var selectedQuestions = [];
-var correctAnswer;
-var questionLength;
 var timeleft;
 var downloadTimer;
 var player;
@@ -66,7 +64,7 @@ function loadQuestions(fullSet) {
 }
 
 // Function called when the game starts. Checks if name input box not empty.
-function firstPlay() {
+$('#startGameButton').click(function() {
     player = document.getElementById('playerName').value;
     if (player.length === 0) {
         $('#missingName').text('You need to enter your name');
@@ -77,9 +75,12 @@ function firstPlay() {
         document.getElementById('player').innerHTML = player;
         startGame();
     }
-}
+});
+/**
+ * Function to pick question for each round and display question and answers on screen
+ */
 
-function startGame() {;
+function startGame() {
     $('#correctMessage').empty();
     $('#correct').empty();
     selection = {
@@ -100,8 +101,6 @@ function startGame() {;
     $('.selection-button').prop("disabled", true);
     $('.selection-button').removeClass('answer-button');
     $('#prize').text('Current prize: ' + prize[step]);
-    correctAnswer = selection.cor;
-    questionLength = selection.q.length;
     showAllButtons();
     $('#chances').text('50:50 Chance x ' + chances);
     delay();
@@ -116,7 +115,7 @@ $('.selection-button').click(
             victory();
         } else {
             $('#' + clickedButton).addClass('correct-answer');
-            if (clickedButton == correctAnswer) {
+            if (clickedButton == selection.cor) {
                 $('#correctMessage').text('Correct !');
                 step = step + 1;
                 resetTimer();
@@ -158,7 +157,10 @@ function timerStart() {
     }, 1000);
 }
 
-//Function used to reset the timer after sucessful answer or failed game. Used to prevent multiple timers running at the same time
+/**
+ * Function used to reset the timer after sucessful answer or failed game. Used to prevent multiple timers running at the same time
+ */
+
 
 function resetTimer() {
     clearInterval(downloadTimer);
@@ -221,12 +223,12 @@ function gameOver() {
 
 // Function used when game fails either by out of time event or by selecting the wrong question
 
-function playAgain() {
+$('.playAgainButton').click(function() {
     resetTimer();
     setInterval(function() {
         location.reload();
     }, 700);
-}
+});
 
 // Time Out function, used when player doesn't click on any answer
 
@@ -249,7 +251,7 @@ function saveScores() {
         highScores.splice(10);
 
         localStorage.setItem('highScores', JSON.stringify(highScores));
-    };
+    }
 }
 
 // Function to reset all buttons after successful answer
@@ -269,7 +271,7 @@ function showAllButtons() {
 
 $('#chancesButton').click(function() {
     chances = chances - 1;
-    if (correctAnswer === 'answer_a' || correctAnswer == 'answer_b') {
+    if (selection.cor === 'answer_a' || selection.cor == 'answer_b') {
         $('.second-answers-row').hide();
         if (chances !== 0) {
             $('#chancesButton').text('50:50 Chance x ' + chances).addClass('disabled');

@@ -30,12 +30,12 @@
                 <div class="row">
                     <div class="col-12 mt-4">
                         <button type="button" class="btn btn-primary btn-lg button-start" data-toggle="modal" data-target="#myModal">
-								Start the Game
-							</button>
+                            Start the Game
+                        </button>
                     </div>
                     <div class="col-12 mt-4">
                         <a class="btn btn-primary btn-lg button-start" href="leaderboard.html">View the list of best
-																																																																																																																																																																																																																								                            scores</a>
+                            scores</a>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         <div id="countdown"></div>
                     </div>
                 </div>
-                <p>Hi,
+                <p class="text-uppercase">Hi,
                     <span id="player"></span>. This is your Question
                     <span id="questionNumber">:</span>
                 </p>
@@ -76,7 +76,7 @@
                 <p class="mt-4" id="correctMessage"></p>
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-primary btn-lg mt-4" id="chancesButton">50:50 Chances x 3</button>
+                        <button class="btn btn-success btn-lg mt-4" id="chancesButton">50:50 Chances x 3</button>
                     </div>
                 </div>
                 <div class="row">
@@ -94,8 +94,8 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel">12 Steps to Million</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <p>Enter your name below and let's start the game.</p>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="firstPlay();">Play the game</button>
+                        <button type="button" class="btn btn-primary" id="startGameButton">Play the game</button>
                     </div>
                 </div>
             </div>
@@ -120,8 +120,8 @@
                         <p id="prizeWon"></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="playAgainGameover" onclick="playAgain();">Play
-																																																																																																																																																																																																																								                            again</button>
+                        <button type="button" class="btn btn-primary playAgainButton" id="playAgainGameover">Play
+                            again</button>
                     </div>
                 </div>
             </div>
@@ -139,8 +139,8 @@
                         <p>Sorry, you have to start again</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="playAgainTimeout" class="btn btn-primary" onclick="playAgain();">Play
-																																																																																																																																																																																																																								                            again</button>
+                        <button type="button" id="playAgainTimeout" class="btn btn-primary playAgainButton">Play
+                            again</button>
                     </div>
                 </div>
             </div>
@@ -152,8 +152,8 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel">Congratulations!</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <img src="assets/images/winner-200px.svg">
@@ -161,8 +161,8 @@
                         <p class="text-center">Enjoy your million!</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="playAgainGameover" onclick="playAgain();">Play
-																																																																																																																																																																																																																								                            again</button>
+                        <button type="button" class="btn btn-primary playAgainButton">Play
+                            again</button>
                     </div>
                 </div>
             </div>
