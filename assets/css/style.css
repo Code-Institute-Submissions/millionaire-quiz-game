@@ -132,6 +132,15 @@ p {
     }
 }
 
+@media (min-width: 992px) {
+    .answer-button:hover {
+        background-color: #0075ff;
+    }
+    .correct-answer {
+        background-color: #008000 !important;
+    }
+}
+
 
 /*************** Leaderboard styling **************/
 
