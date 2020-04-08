@@ -124,6 +124,15 @@ p {
 }
 
 
+/*************** Remove hover effect on mobile **************/
+
+@media (hover: none) {
+    .answer-button {
+        background-color: #0075ff;
+    }
+}
+
+
 /*************** Leaderboard styling **************/
 
 .centered-high-scores {
