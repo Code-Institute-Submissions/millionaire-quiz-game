@@ -12,9 +12,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="https://chancejs.com/chance.min.js" defer></script>
-    <script src="assets/js/script.js"></script>
+
     <title>Millionaire Quiz Game</title>
 </head>
 
@@ -37,7 +35,7 @@
                     </div>
                     <div class="col-12 mt-4">
                         <a class="btn btn-primary btn-lg button-start" href="leaderboard.html">View the list of best
-																																																																																																																																																								                            scores</a>
+																																																																																																																																																																																																																								                            scores</a>
                     </div>
                 </div>
             </div>
@@ -59,31 +57,31 @@
                     <span id="questionNumber">:</span>
                 </p>
                 <h4 class="mt-4" id="question"></h4>
-                <div class="row">
+                <div class="row first-answers-row answers-buttons-rows">
                     <div class="col-md-6 mt-4">
-                        <button class="inactive-button" id="answer_a" onclick="selected('answer_a')"></button>
+                        <button class="selection-button inactive-button" id="answer_a" value="answer_a"></button>
                     </div>
                     <div class="col-md-6 mt-4">
-                        <button class="inactive-button" id="answer_b" onclick="selected('answer_b')"></button>
+                        <button class="selection-button inactive-button" id="answer_b" value="answer_b"></button>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row second-answers-row">
                     <div class="col-md-6 mt-4">
-                        <button class="inactive-button" id="answer_c" onclick="selected('answer_c')"></button>
+                        <button class="selection-button inactive-button" id="answer_c" value="answer_c"></button>
                     </div>
                     <div class="col-md-6 mt-4">
-                        <button class="inactive-button" id="answer_d" onclick="selected('answer_d')"></button>
+                        <button class="selection-button inactive-button" id="answer_d" value="answer_d"></button>
                     </div>
                 </div>
                 <p class="mt-4" id="correctMessage"></p>
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-primary btn-lg mt-4" id="chances" onclick="useChances()"></button>
+                        <button class="btn btn-primary btn-lg mt-4" id="chancesButton">50:50 Chances x 3</button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-danger btn-lg mt-4" id="chances" onclick="quitGame()">Quit Game</button>
+                        <button class="btn btn-danger btn-lg mt-4" id="quitGameButton">Quit Game</button>
                     </div>
                 </div>
 
@@ -123,7 +121,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" id="playAgainGameover" onclick="playAgain();">Play
-																																																																																																																																																								                            again</button>
+																																																																																																																																																																																																																								                            again</button>
                     </div>
                 </div>
             </div>
@@ -142,7 +140,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="playAgainTimeout" class="btn btn-primary" onclick="playAgain();">Play
-																																																																																																																																																								                            again</button>
+																																																																																																																																																																																																																								                            again</button>
                     </div>
                 </div>
             </div>
@@ -164,12 +162,15 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" id="playAgainGameover" onclick="playAgain();">Play
-																																																																																																																																																								                            again</button>
+																																																																																																																																																																																																																								                            again</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://chancejs.com/chance.min.js" defer></script>
+    <script src="assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
