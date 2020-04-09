@@ -124,6 +124,13 @@ p {
 }
 
 
+/*************** Special class to hide items on mobile since .hide() doesn't work **************/
+
+.hide {
+    display: none;
+}
+
+
 /*************** Remove hover effect on mobile **************/
 
 @media (hover: none) {
@@ -132,7 +139,7 @@ p {
     }
 }
 
-@media (min-width: 992px) {
+@media (max-width: 992px) {
     .answer-button:hover {
         background-color: #0075ff;
     }

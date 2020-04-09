@@ -257,12 +257,13 @@ function saveScores() {
 // Function to reset all buttons after successful answer
 
 function showAllButtons() {
-    $('.answers-buttons-rows').show();
+    // $('.answers-buttons-rows').show();
+    $('.answers-buttons-rows').removeClass('hide');
     console.log(`Chances: ${chances}`);
     if (chances !== 0) {
-        $('#chances').removeClass('disabled');
+        $('#chancesButton').removeClass('disabled');
     } else {
-        $('#chances').text('All chances used').addClass('disabled');
+        $('#chancesButton').text('All chances used').addClass('disabled');
     }
 }
 
@@ -272,14 +273,14 @@ function showAllButtons() {
 $('#chancesButton').click(function() {
     chances = chances - 1;
     if (selection.cor === 'answer_a' || selection.cor == 'answer_b') {
-        $('.second-answers-row').hide();
+        $('.second-answers-row').addClass('hide');
         if (chances !== 0) {
             $('#chancesButton').text('50:50 Chance x ' + chances).addClass('disabled');
         } else {
             $('#chancesButton').text('All chances used').addClass('disabled');
         }
     } else {
-        $('.first-answers-row').hide();
+        $('.first-answers-row').addClass('hide');
         if (chances !== 0) {
             $('#chancesButton').text('50:50 Chance x ' + chances).addClass('disabled');
         } else {
