@@ -15,21 +15,30 @@ Link to live project here: [Quiz Game][1]
 
 ### User Stories
 
-- The user is presented with welcome screen, where she/he can read the rules of the game, start the game with a button and view the high scores list using the second button.
+- As a player I'd like to play a game that is easy to use and can be played alone or in a group of friends.
+- I'd like tha game to test my general knowledge in engaging and fun way.
+- As a casual player I'd like the game to be played without a lengthy learning process and without unnecessary steps to start.
+- I'd like the game to be challenging and fun to play for longer period of time.
+  
+### Structure
+
+- The player is presented with welcome screen, where she/he can read the rules of the game, start the game with a button or view the high scores table using the second button.
 - When starting the game the player has to enter own name, the game won’t start with an empty field.
-- The user gets some extra time before the timer (45 sec.) starts running. The delay is based on the length of the question (2, 4, 6 seconds).
-- The user is able to re-start the game after failed answer or when the timer runs out. Each event is presented with a modal screen.
-- The user can quit game the game at any stage using "Quit Game" button at the bottom of the game screen.
+- The player gets some extra time before the timer (45 sec.) starts running. The delay is based on the length of the question (2, 4, 6 seconds).
+- The player is able to re-start the game after failed answer or when the timer runs out. Each event is presented with a modal screen.
+- The player can quit game the game at any stage using "Quit Game" button at the bottom of the game screen.
+- The game uses a database of 547 unique questions so it can be played for a long time before all they are all memorised.
 
 ---
 
 ## Design
 
-The game uses colorful, cartoon-ish graphics for the user interface. The background imitates a live tv show stage.
+The game uses colorful, cartoon-ish graphics for the user interface. The background imitates a live TV show studio.
 
 ![Game preview][image-1]
 
 ### Wireframes
+
 [Welcome Screen](wireframes/welcome-screen.png)
 
 [Game Screen](wireframes/game-screen.png)
@@ -43,7 +52,7 @@ The game uses colorful, cartoon-ish graphics for the user interface. The backgro
 ## Features
 
 - The game uses a set of questions loaded from the JSON file containing question, 4 answers and correct answer as each record. JSON file contains 547 sets of questions and answers.
-- Using external library chance.js each game generates 12 unique and random numbers between 1 - 547. These numbers are used as indexes to pick questions from the large set. These 12 question make the set for one game.
+- Using external library `chance.js` each game generates 12 unique and random numbers between 1 - 547. These numbers are used as indexes to pick questions from the large set. These 12 question make the set for one game.
 - The game has a high score page. It uses localStorage feature of Javascript to save scores on individual machines. The scores are sorted - the best to the worst. The local storage only stores 10 best results and games with less than 2 questions are not saved.
 
 ### Future plans
@@ -92,8 +101,8 @@ The game uses the following:
 - The local storage saving functionality was created using James Quick tutorial found on [YouTube][3]
 - Shout out to Steve, tutor that helped me with the timer issue
 
-[1]:	https://redlik.github.io/millionaire-quiz-game/index.html "Quiz Game"
-[2]:	https://chancejs.com/
-[3]:	https://youtu.be/u98ROZjBWy8
+[1]: https://redlik.github.io/millionaire-quiz-game/index.html "Quiz Game"
+[2]: https://chancejs.com/
+[3]: https://youtu.be/u98ROZjBWy8
 
-[image-1]:	wireframes/mockups.jpg
+[image-1]: wireframes/mockups.jpg
