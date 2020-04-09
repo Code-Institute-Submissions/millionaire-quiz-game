@@ -12,47 +12,53 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
-
     <title>Millionaire Quiz Game</title>
 </head>
 
 <body>
+
+    <!-- GAME WELCOME SCREEN -->
+
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center" id="welcome-screen">
             <div class="col-lg-6 align-self-center">
                 <img src="assets/images/quiz-logo-start.svg" class="logo-welcome mx-auto mb-4" alt="Game logo">
                 <h4>Welcome to the game</h4>
-                <p>The rules are simple - you have to answer 12 questions to win the main prize. Each question has only 1 correct answer.
+                <p>The rules are simple - you have to answer 12 questions to win the main prize. <br />Each question has only 1 correct answer.
                 </p>
-                <p>You can use 3 chances throughout the game - they will remove 2 incorrect answers from the screen to help you guess</p>
-                <!-- Button trigger modal -->
-
+                <p>You can use 3 chances throughout the game - they will remove 2 incorrect answers from the screen to help you guess.</p>
                 <div class="row">
                     <div class="col-12 mt-4">
-                        <button type="button" class="btn btn-success btn-lg button-start" data-toggle="modal" data-target="#myModal">
+                        <button type="button" class="btn btn-success btn-lg button-start" data-toggle="modal" data-target="#startGameWindow">
                             Start the Game
                         </button>
                     </div>
                     <div class="col-12 mt-4">
-                        <a class="btn btn-primary btn-lg button-start" href="leaderboard.html">View the list of best
-                            scores</a>
+                        <a class="btn btn-primary btn-lg button-start" href="leaderboard.html">
+                            View the list of best scores</a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- MAIN GAME SCREEN -->
+
         <div class="row h-100 align-items-center justify-content-center" id="game-screen">
 
             <div class="col-12">
                 <img src="assets/images/logo-quiz.svg" class="quiz-logo mx-auto mb-4" alt="Game main logo">
                 <div class="row justify-content-between">
-                    <div class="col-lg-2">
-                        <p id="prize"></p>
+                    <div class="col-lg-2 col-6">
+                        <p class="text-uppercase info-boxes mx-auto"><span id="prize"></span><br>Prize
+                        </p>
                     </div>
-                    <div class="col-lg-2">
-                        <div id="countdown"></div>
+                    <div class="col-lg-2 col-6">
+                        <p class="text-uppercase info-boxes mx-auto"><span id="countdown">
+                                <i class="fas fa-hourglass-half"></i></span><br>Timer
+                        </p>
                     </div>
                 </div>
-                <p class="text-uppercase">Hi,
+                <p class="text-uppercase large-text">Hi,
                     <span id="player"></span>. This is your Question
                     <span id="questionNumber">:</span>
                 </p>
@@ -88,7 +94,9 @@
             </div>
         </div>
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <!-- NEW GAME DIALOG WINDOW -->
+
+        <div class="modal fade" id="startGameWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -109,6 +117,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- GAME OVER DIALOG WINDOW-->
+
         <div class="modal fade" id="gameOverWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -126,6 +137,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- TIME OUT DIALOG WINDOW -->
+
         <div class="modal fade" id="timeOutWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -145,6 +159,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- FINISHED GAME VICTORY WINDOW -->
 
         <div class="modal fade" id="victoryWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -168,7 +184,7 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="https://chancejs.com/chance.min.js" defer></script>
+    <script src="https://chancejs.com/chance.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
