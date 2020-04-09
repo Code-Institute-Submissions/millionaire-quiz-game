@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 /*************** General styling **************/
 
@@ -9,7 +10,8 @@ body {
     background-position: top center;
     background-size: cover;
     color: #fff;
-    font-family: 'Concert One', cursive;
+    /* font-family: 'Concert One', cursive; */
+    font-family: 'Poppins', sans-serif;
     text-align: center;
     height: 100vh;
     min-height: 100vh;
@@ -70,6 +72,19 @@ p {
     font-family: 'Luckiest Guy', cursive;
     font-size: 1.6rem;
     color: #adff2f;
+}
+
+.large-text {
+    font-size: 1.7rem;
+}
+
+.info-boxes {
+    border: 2px solid #87C932;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgba(20, 20, 20, 0.6);
+    width: 130px;
+    color: #fffb00;
 }
 
 
