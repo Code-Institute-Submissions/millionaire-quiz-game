@@ -1,3 +1,7 @@
+/*
+ * Global Variables
+ */
+
 const prize = [
     '€500',
     '€1,000',
@@ -22,7 +26,9 @@ var chances = 3;
 
 let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 
-// Function to generate unique set of 12 questions using Chance.js library
+/**
+ * Function to generate unique set of 12 questions using Chance.js library 
+ */
 
 function generateUnique() {
     const uniques = chance.unique(chance.natural, 12, {
@@ -32,7 +38,10 @@ function generateUnique() {
     return uniques;
 }
 
-// Function to load questions from JSON file.
+/*
+ * Function to load questions from JSON file. 
+ */
+
 $(function() {
     const xmlhttp = new XMLHttpRequest();
     const url = 'questions.json';
@@ -41,7 +50,7 @@ $(function() {
         if (this.readyState == 4 && this.status == 200) {
             let fullSetQuestions = JSON.parse(this.responseText);
             loadQuestions(fullSetQuestions);
-            $('#myModal').modal('hide');
+            $('#startGameWindow').modal('hide');
             $('#game-screen').hide();
             $('#gameOverWindow').modal('hide');
             $('#timeOutWindow').modal('hide');
@@ -54,7 +63,9 @@ $(function() {
 
 });
 
-// Function to create sub array of 12 questions from big array using generated numbers
+/*
+ * Function to create sub array of 12 questions from big array using generated numbers 
+ */
 
 function loadQuestions(fullSet) {
     const gameQuestionNumbers = generateUnique();
@@ -63,20 +74,24 @@ function loadQuestions(fullSet) {
     return selectedQuestions;
 }
 
-// Function called when the game starts. Checks if name input box not empty.
+/* 
+ * Function called when the game starts. Checks if name input box not empty.
+ */
+
 $('#startGameButton').click(function() {
     player = document.getElementById('playerName').value;
     if (player.length === 0) {
         $('#missingName').text('You need to enter your name');
     } else {
-        $('#myModal').modal('hide');
+        $('#startGameWindow').modal('hide');
         $('#welcome-screen').hide();
         $('#game-screen').show();
         document.getElementById('player').innerHTML = player;
         startGame();
     }
 });
-/**
+
+/*
  * Function to pick question for each round and display question and answers on screen
  */
 
@@ -100,13 +115,15 @@ function startGame() {
     $('#answer_d').text(selection.d);
     $('.selection-button').prop("disabled", true);
     $('.selection-button').removeClass('answer-button');
-    $('#prize').text('Current prize: ' + prize[step]);
+    $('#prize').text(prize[step]);
     showAllButtons();
     $('#chances').text('50:50 Chance x ' + chances);
     delay();
 }
 
-// Function to check selected answer
+/*
+ * Function to check selected answer
+ */
 
 $('.selection-button').click(
     function() {
@@ -135,7 +152,7 @@ $('.selection-button').click(
 );
 
 
-/** 
+/* 
  *  Question countdown timer function
  */
 
@@ -157,8 +174,9 @@ function timerStart() {
     }, 1000);
 }
 
-/**
- * Function used to reset the timer after sucessful answer or failed game. Used to prevent multiple timers running at the same time
+/*
+ * Function used to reset the timer after successful answer or failed game. 
+ * Used to prevent multiple timers running at the same time
  */
 
 
@@ -167,17 +185,21 @@ function resetTimer() {
     $('#countdown').empty();
 }
 
-// Function to delay the timer based on the length of the question
+/*
+ * Function to delay the timer based on the length of the question
+ */
 
 function delay() {
     const t = calculateDelay(selection.q.length) * 1000;
-    console.log('Time: ' + t);
     setTimeout(function() {
         timerStart();
     }, t);
 }
 
-// Function that returns the amount of seconds of delay based on the lenght of the question in characters. Used to hold the timer and allow the player to read the question
+/* 
+ * Function that returns the amount of seconds of delay based on the length of the question in characters. 
+ * Used to hold the timer and allow the player to read the question.
+ */
 
 function calculateDelay(qLength) {
     if (qLength < 21) {
@@ -191,18 +213,26 @@ function calculateDelay(qLength) {
     }
 }
 
-// Function to display Winner pop up when all question answered correctly
+/* 
+ * Function to display Winner pop up when all question answered correctly
+ */
+
 function victory() {
     $('#victoryWindow').modal('show');
 }
 
-// Wrong answer function
+/*
+ * Wrong answer function
+ */
+
 function wrongAnswer() {
     $('#' + selection.cor).addClass('correct-answer');
     gameOver();
 }
 
-// Game over function, used when player clicks on wrong answer
+/*
+ * Game over function, used when player clicks on wrong answer
+ */
 
 function gameOver() {
     if (step === 0) {
@@ -221,7 +251,9 @@ function gameOver() {
     }
 }
 
-// Function used when game fails either by out of time event or by selecting the wrong question
+/* 
+ * Function called when game fails either by out of time event or by selecting the wrong question
+ */
 
 $('.playAgainButton').click(function() {
     resetTimer();
@@ -230,14 +262,18 @@ $('.playAgainButton').click(function() {
     }, 700);
 });
 
-// Time Out function, used when player doesn't click on any answer
+/*
+ * Time Out function, used when player doesn't click on any answer
+ */
 
 function timeOut() {
     $('#countdown').html('<i class="fas fa-hourglass-half"></i> 0');
     $('#timeOutWindow').modal('show');
 }
 
-// Save scores function, only saving results with more than 3 questions answered correctly
+/* 
+ * Save scores function, only saving results with more than 3 questions answered correctly
+ */
 
 function saveScores() {
     if (step >= 3) {
@@ -254,12 +290,12 @@ function saveScores() {
     }
 }
 
-// Function to reset all buttons after successful answer
+/* 
+ * Function to reset all buttons after successful answer
+ */
 
 function showAllButtons() {
-    // $('.answers-buttons-rows').show();
     $('.answers-buttons-rows').removeClass('hide');
-    console.log(`Chances: ${chances}`);
     if (chances !== 0) {
         $('#chancesButton').removeClass('disabled');
     } else {
@@ -268,7 +304,9 @@ function showAllButtons() {
 }
 
 
-// Function to hide 2 incorrect answers
+/* 
+ * Function to hide 2 incorrect answers when Chance button is clicked
+ */
 
 $('#chancesButton').click(function() {
     chances = chances - 1;
@@ -289,7 +327,9 @@ $('#chancesButton').click(function() {
     }
 });
 
-// Function to quit the game at go back to welcome screen
+/*
+ * Function to quit the game at go back to welcome screen
+ */
 
 $('#quitGameButton').click(function() {
     location.reload();
