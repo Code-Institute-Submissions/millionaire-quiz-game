@@ -263,7 +263,7 @@ function showAllButtons() {
     if (chances !== 0) {
         $('#chancesButton').removeClass('disabled');
     } else {
-        $('#chancesButton').text('All chances used').addClass('disabled');
+        $('#chancesButton').text('All chances used').addClass('disabled').prop("disabled", true);
     }
 }
 
