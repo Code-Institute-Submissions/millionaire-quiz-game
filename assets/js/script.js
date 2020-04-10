@@ -206,10 +206,10 @@ function calculateDelay(qLength) {
         return 2;
     } else if (qLength < 51) {
         return 4;
-    } else if (qLength < 76) {
+    } else if (qLength < 100) {
         return 6;
     } else if (qLength < 200) {
-        return 6;
+        return 8;
     }
 }
 
