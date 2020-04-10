@@ -96,6 +96,8 @@ As per my mentor's request I've included Jasmine testing. This is how the testin
 - I've included more tests to check all break points of my function, to be sure each of 500+ questions behave as expected.
 - This type of testing is an effective way to control the outcome of any function when extra code is being added and complexity of the function grows.
 
+Test file can be found here: [test.html](test/test.html)
+
 ## Deployment
 
 - The project is hosted on GitHub repository under this url: [Game Repository](https://github.com/redlik/millionaire-quiz-game)
