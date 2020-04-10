@@ -264,7 +264,7 @@ function saveScores() {
     if (step >= 3) {
         let score = {
             step: step,
-            score: prize[step],
+            score: prize[step - 1],
             player: player,
         };
         highScores.push(score);
