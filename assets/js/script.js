@@ -110,8 +110,8 @@ function startGame() {
     $('.selection-button').prop("disabled", true);
     $('.selection-button').removeClass('answer-button');
     $('#prize').text(prize[step]);
+    $('#countdown').html('<i class="fas fa-hourglass-half"></i>');
     showAllButtons();
-    $('#chances').text('50:50 Chance x ' + chances);
     delay();
 }
 
@@ -172,7 +172,6 @@ function timerStart() {
  */
 function resetTimer() {
     clearInterval(downloadTimer);
-    $('#countdown').empty();
 }
 
 /*
@@ -190,16 +189,20 @@ function delay() {
  * Used to hold the timer and allow the player to read the question.
  */
 function calculateDelay(qLength) {
-    if (qLength < 21) {
-        return 2;
-    } else if (qLength < 51) {
-        return 4;
-    } else if (qLength < 100) {
-        return 6;
-    } else if (qLength < 200) {
-        return 8;
+    switch (true) {
+        case (qLength < 21):
+            return 2;
+        case (qLength < 51):
+            return 4;
+        case (qLength < 101):
+            return 6;
+        case (qLength < 201):
+            return 8;
+        default:
+            return 10;
     }
 }
+
 
 /* 
  * Function to display Winner pop up when all question answered correctly
