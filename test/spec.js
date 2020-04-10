@@ -7,7 +7,10 @@ describe("Delay Calculator", function() {
             expect(calculateDelay(97)).toBe(6);
         });
         it("should return 8", function() {
-            expect(calculateDelay(195)).toBe(8);
+            expect(calculateDelay(198)).toBe(8);
+        });
+        it("default value should return 10", function() {
+            expect(calculateDelay(210)).toBe(10);
         });
     });
 });
