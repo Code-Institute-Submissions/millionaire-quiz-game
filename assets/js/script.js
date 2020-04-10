@@ -297,7 +297,7 @@ function saveScores() {
 function showAllButtons() {
     $('.answers-buttons-rows').removeClass('hide');
     if (chances !== 0) {
-        $('#chancesButton').removeClass('disabled');
+        $('#chancesButton').removeClass('disabled').prop("disabled", false);;
     } else {
         $('#chancesButton').text('All chances used').addClass('disabled').prop("disabled", true);
     }
@@ -309,20 +309,22 @@ function showAllButtons() {
  */
 
 $('#chancesButton').click(function() {
-    chances = chances - 1;
-    if (selection.cor === 'answer_a' || selection.cor == 'answer_b') {
-        $('.second-answers-row').addClass('hide');
-        if (chances !== 0) {
-            $('#chancesButton').text('50:50 Chance x ' + chances).addClass('disabled');
+    if (chances => 1) {
+        chances = chances - 1;
+        if (selection.cor === 'answer_a' || selection.cor == 'answer_b') {
+            $('.second-answers-row').addClass('hide');
+            if (chances !== 0) {
+                $('#chancesButton').text('50:50 Chance x ' + chances).addClass('disabled').prop("disabled", true);
+            } else {
+                $('#chancesButton').text('All chances used').addClass('disabled');
+            }
         } else {
-            $('#chancesButton').text('All chances used').addClass('disabled');
-        }
-    } else {
-        $('.first-answers-row').addClass('hide');
-        if (chances !== 0) {
-            $('#chancesButton').text('50:50 Chance x ' + chances).addClass('disabled');
-        } else {
-            $('#chancesButton').text('All chances used').addClass('disabled');
+            $('.first-answers-row').addClass('hide');
+            if (chances !== 0) {
+                $('#chancesButton').text('50:50 Chance x ' + chances).addClass('disabled').prop("disabled", true);;
+            } else {
+                $('#chancesButton').text('All chances used').addClass('disabled');
+            }
         }
     }
 });

@@ -4,7 +4,7 @@ describe("Delay Calculator", function() {
             expect(calculateDelay(20)).toBe(2);
         });
         it("should return 6", function() {
-            expect(calculateDelay(102)).toBe(8);
+            expect(calculateDelay(97)).toBe(6);
         });
         it("should return 8", function() {
             expect(calculateDelay(195)).toBe(8);
