@@ -74,17 +74,27 @@ The game uses the following:
 
 ## Testing
 
-- The project was built on a local machine using VS Code editor as the main tool. I've used couple of extensions to help me with the code, such as ESlint, Prettier and Live Server to have constant preview of the project. I've used Chrome and Firefox as my testing desktop browsers with their built in DevTools (mainly Console) to catch any bugs in the code.
-- While writing the JS part of the application I've used console.log extensively to print out the variables, calculations or arrays used for the game. Developer tools were also helpful to preview the contents of the local storage items, normally not accessible to regular user.
-- With the access to all answers I've run the game start to finish couple of times to make sure it is playable and doesn't brake along the way. The game does indeed stop at the 12th question and displays Victory splash screen. All scores above 3 are being recorded to local storage. There's only 1 user input box - Player's name. It won't allow the game to continue without the name being entered. I've asked my family members to play as well to spot any issues I could have missed.
+- The project was built on a local machine using VS Code editor as the main tool. I've used couple of extensions to help me with the code, such as ESlint, Prettier and Live Server to have constant preview of the project. I've used Chrome and Firefox as my testing desktop browsers with their built-in DevTools (mainly Console) to catch any bugs in the code.
+- While writing the JS part of the application I've used `console.log` extensively to print out the variables, calculations or arrays used for the game. Developer tools were also helpful to preview the contents of the local storage items, normally not accessible to regular user.
+- With the access to all answers I've run the game start to finish couple of times to make sure it is playable and doesn't brake along the way. The game does indeed stop at the 12th question and displays Victory splash screen. All scores above 3 are being recorded to local storage. There's only 1 user input box - Player's name. It won't allow the game to continue without the name being entered. I've asked my family members to play as well to spot any issues I could have missed. I've left a console.log command in my final code to print all 12 questions with answers for each game as a way to test it.
 
 **During the development I come across couple of challenging issues:**
 
 - The countdown timer was not running correctly after few questions answered. I've built a function to delay the timer "ticking" to give the player an extra time to read the question and the answers. After the delay the timer would start counting down 45 seconds. The issue was if a player clicks on an answer button during the delay the timer would not reset and start another one on top of the previous. Thus after few questions the timer would run 2x or 3x times faster. The solution for that was to disable the click event for all 4 answer buttons, and only make them "clickable" when the delay ends.
 - Another serious issue was mobile browsers not supporting Jquery .hide and .show functions. I use these 2 functions to hide 2 answer buttons when the player uses the "50:50 Chance" button. When the button is clicked the game hides 2 incorrect answers. This feature was working correctly on desktop browsers, but on mobile devices the buttons would hide but for the next question they would not reset to show all 4 again. I had to switch to special css class instead, which uses "display: none" to hide the items.
 - I've noticed that mobile browsers didn't reset the hover state from the answer buttons. The game does not refresh the page after each question so after a successful answer, the button that was clicked was still highlighted with different colour. Using media queries I was able to fix it.
-- As per my mentor's request I've included Jasmine test on the function calculating the delay, base on the length of the question.
 - The game was tested on all main browsers (Chrome, Firefox, Safari, Edge) and couple of mobile devices (iPhone, iPad, Samsung Galaxy). All devices display the game correctly.
+
+### Jasmine Testing
+
+As per my mentor's request I've included Jasmine testing. This is how the testing was performed:
+
+- The testing is done using an external library called Jasmine.
+- For testing I've created a new html file `test.html` which contains links to Jasmine script files, a link to my own main script file `script.js` and separate file for my tests `test.js`.
+- I've decided to test a function which calculates a delay of the timer ticking based on the length of the question. The longer it was the bigger the delay should be. My function has couple of "break points" so I wanted to test if particular number of character will fall into the right range, ie. line shorter than 21 characters should return 2 second delay, line shorter than 51 character should return 4 seconds etc.
+- I've started my tests with intension to fail them to make sure the function will not pass incorrect values, so for my first test - the length less than 21 character - I've passed number bigger than 21. If the test pass it would mean a longer question would pick shorter delay. The test failed, so I followed with value smaller than 21 - this time the test passed.
+- I've included more tests to check all break points of my function, to be sure each of 500+ questions behave as expected.
+- This type of testing is an effective way to control the outcome of any function when extra code is being added and complexity of the function grows.
 
 ## Deployment
 
